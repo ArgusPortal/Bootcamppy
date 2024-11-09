@@ -6,8 +6,8 @@ from tqdm import tqdm  # importa o tqdm para barra de progresso
 CONCURRENCY = cpu_count()
 
 # Define o total de linhas conhecido e o tamanho do chunk
-total_linhas = 1_000_000_000  # Total de linhas conhecido
-chunksize = 100_000_000  # Define o tamanho do chunk
+total_linhas = 1000000  # Total de linhas conhecido
+chunksize = 1000000 # Define o tamanho do chunk
 filename = "data/measurements.txt"  # Certifique-se de que este é o caminho correto para o arquivo
 
 def process_chunk(chunk):
@@ -33,5 +33,9 @@ def create_df_with_pandas(filename, total_linhas, chunksize=chunksize):
 
 # Bloco principal do script
 if __name__ == "__main__":
+    import time
+    start_time = time.time()  # Marca o tempo de início
     final_df = create_df_with_pandas(filename, total_linhas, chunksize)
     print(final_df)
+    took = time.time() - start_time  # Calcula o tempo decorrido
+    print(f"Pandas Took: {took:.2f} sec")  # Imprime o tempo decorrido

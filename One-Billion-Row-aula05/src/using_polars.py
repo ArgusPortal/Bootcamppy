@@ -8,7 +8,7 @@ import polars as pl
 # Função para criar um DataFrame usando Polars
 def create_polars_df():
     # Configura o tamanho do chunk para streaming
-    pl.Config.set_streaming_chunk_size(4000000)
+    pl.Config.set_streaming_chunk_size(1000000)
     return (
         # Lê o arquivo CSV usando Polars em modo de streaming
         pl.scan_csv("data/measurements.txt", separator=";", has_header=False, new_columns=["station", "measure"], schema={"station": pl.String, "measure": pl.Float64})
@@ -28,6 +28,10 @@ def create_polars_df():
 
 # Bloco principal do script
 if __name__ == "__main__":
+    import time
+    start_time = time.time()  # Marca o tempo de início
     # Chama a função para criar o DataFrame e imprime o resultado
     df = create_polars_df()
     print(df)
+    took = time.time() - start_time  # Calcula o tempo decorrido
+    print(f"Polars Took: {took:.2f} sec")  # Imprime o tempo decorrido
