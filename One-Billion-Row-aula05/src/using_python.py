@@ -3,10 +3,10 @@ from collections import defaultdict, Counter
 from tqdm import tqdm  # barra de progresso
 import time
 
-NUMERO_DE_LINHAS = 1_000_000_000
+NUMERO_DE_LINHAS = 1_000_000_000  # Número total de linhas esperado no arquivo
 
 def processar_temperaturas(path_do_csv):
-    # utilizando infinito positivo e negativo para comparar
+    # Utilizando infinito positivo e negativo para comparar
     minimas = defaultdict(lambda: float('inf'))
     maximas = defaultdict(lambda: float('-inf'))
     somas = defaultdict(float)
@@ -14,7 +14,7 @@ def processar_temperaturas(path_do_csv):
 
     with open(path_do_csv, 'r') as file:
         _reader = reader(file, delimiter=';')
-        # usando tqdm diretamente no iterador, isso mostrará a porcentagem de conclusão.
+        # Usando tqdm diretamente no iterador, isso mostrará a porcentagem de conclusão.
         for row in tqdm(_reader, total=NUMERO_DE_LINHAS, desc="Processando"):
             nome_da_station, temperatura = str(row[0]), float(row[1])
             medicoes.update([nome_da_station])
@@ -24,25 +24,24 @@ def processar_temperaturas(path_do_csv):
 
     print("Dados carregados. Calculando estatísticas...")
 
-    # calculando min, média e max para cada estação
+    # Calculando min, média e max para cada estação
     results = {}
     for station, qtd_medicoes in medicoes.items():
         mean_temp = somas[station] / qtd_medicoes
         results[station] = (minimas[station], mean_temp, maximas[station])
 
     print("Estatística calculada. Ordenando...")
-    # ordenando os resultados pelo nome da estação
+    # Ordenando os resultados pelo nome da estação
     sorted_results = dict(sorted(results.items()))
 
-    # formatando os resultados para exibição
+    # Formatando os resultados para exibição
     formatted_results = {station: f"{min_temp:.1f}/{mean_temp:.1f}/{max_temp:.1f}"
                          for station, (min_temp, mean_temp, max_temp) in sorted_results.items()}
 
     return formatted_results
 
-
 if __name__ == "__main__":
-    path_do_csv = "data/measurements.txt"
+    path_do_csv = "data/measurements.txt"  # Caminho para o arquivo CSV
 
     print("Iniciando o processamento do arquivo.")
     start_time = time.time()  # Tempo de início
@@ -51,6 +50,7 @@ if __name__ == "__main__":
 
     end_time = time.time()  # Tempo de término
 
+    # Imprime os resultados formatados
     for station, metrics in resultados.items():
         print(station, metrics, sep=': ')
 

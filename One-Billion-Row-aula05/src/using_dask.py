@@ -2,7 +2,7 @@ import dask
 import dask.dataframe as dd
 
 def create_dask_df():
-    dask.config.set({'dataframe.query-planning': True})
+    dask.config.set({'dataframe.query-planning': True})  # Configura o Dask para planejamento de consultas
     # Configurando o Dask DataFrame para ler o arquivo CSV
     # Como o arquivo não tem cabeçalho, especificamos os nomes das colunas manualmente
     df = dd.read_csv("data/measurements.txt", sep=";", header=None, names=["station", "measure"])
@@ -21,12 +21,12 @@ def create_dask_df():
 if __name__ == "__main__":
     import time
 
-    start_time = time.time()
+    start_time = time.time()  # Marca o tempo de início
     df = create_dask_df()
     
     # O cálculo real e a ordenação são feitos aqui
     result_df = df.compute().sort_values("station")
-    took = time.time() - start_time
+    took = time.time() - start_time  # Calcula o tempo decorrido
 
-    print(result_df)
-    print(f"Dask Took: {took:.2f} sec")
+    print(result_df)  # Imprime o DataFrame resultante
+    print(f"Dask Took: {took:.2f} sec")  # Imprime o tempo decorrido

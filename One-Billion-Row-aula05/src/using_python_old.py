@@ -1,13 +1,13 @@
 from csv import reader
 from collections import defaultdict
 import time
-
 from pathlib import Path
 
 def processar_temperaturas(path_do_txt: Path):
     print("Iniciando o processamento do arquivo.")
-    start_time = time.time()  # Tempo de início
+    start_time = time.time()  # Marca o tempo de início
 
+    # Cria um defaultdict para armazenar listas de temperaturas por estação
     temperatura_por_station = defaultdict(list)
 
     """
@@ -16,7 +16,7 @@ def processar_temperaturas(path_do_txt: Path):
             'Hamburg': [12.0],
             'Bulawayo': [8.9],
             'Palembang': [38.8],
-            'St. John\'s': [15.2],
+            'St. John's': [15.2],
             'Cracow': [12.6],
             'Bridgetown': [26.9],
             'Istanbul': [6.2, 23.0], # Note que Istanbul tem duas entradas
@@ -32,9 +32,11 @@ def processar_temperaturas(path_do_txt: Path):
         temperatura_por_station[nome_da_station].append(temperatura)
     """
 
+    # Abre o arquivo para leitura
     with open(path_do_txt, 'r', encoding="utf-8") as file:
         _reader = reader(file, delimiter=';')
         for row in _reader:
+            # Lê cada linha e adiciona a temperatura à lista correspondente à estação
             nome_da_station, temperatura = str(row[0]), float(row[1])
             temperatura_por_station[nome_da_station].append(temperatura)
 
@@ -57,14 +59,13 @@ def processar_temperaturas(path_do_txt: Path):
     # Formatando os resultados para exibição
     formatted_results = {station: f"{min_temp:.1f}/{mean_temp:.1f}/{max_temp:.1f}" for station, (min_temp, mean_temp, max_temp) in sorted_results.items()}
 
-    end_time = time.time()  # Tempo de término
+    end_time = time.time()  # Marca o tempo de término
     print(f"Processamento concluído em {end_time - start_time:.2f} segundos.")
 
     return formatted_results
 
 # Substitua "data/measurements10M.txt" pelo caminho correto do seu arquivo
 if __name__ == "__main__":
-
     # 1M 0.38 segundos
     # 10M 3.96 segundos.
     path_do_txt: Path = Path("data/measurements.txt")
