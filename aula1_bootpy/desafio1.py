@@ -22,6 +22,5 @@ valor_do_bonus = CONSTANTE_BONUS + salario_usuario * bonus_usuario
 # 5 - Finalmente, o programa deve imprimir uma mensagem informando o seu nome, o seu salario, o seu bonus e o valor total recebido.
 
 
-print(f"Olá {nome_usuario} este ano você recebeu um salário mensal de R$ {
-      salario_usuario} e um bonus de {bonus_usuario} totalizando um valor de R$ {valor_do_bonus:.2f} !!!")
+print(f"Olá {nome_usuario} este ano você recebeu um salário mensal de R$ {salario_usuario} e um bonus de R$ {bonus_usuario} totalizando um valor de R$ {valor_do_bonus:.2f} !!!")
 
