@@ -1,11 +1,11 @@
 ### Exercício 6. Contagem de Palavras em Textos
 # Objetivo:** Dado um texto, contar quantas vezes cada palavra única aparece nele.
 
-frase = input("Digite uma frase: ")
+# frase = input("Digite uma frase: ")
 
-frase2 = frase.split(" ")
+# frase2 = frase.split(" ")
 
-print(len(frase2))
+# print(len(frase2))
 
 # v2
 
@@ -15,14 +15,14 @@ print(len(frase2))
 
 # v3
 
-# texto = "a raposa marrom salta sobre o cachorro preguiçoso"
-# palavras = texto.split()
-# contagem_palavras = {}
+texto = "a raposa marrom salta sobre o cachorro preguiçoso"
+palavras = texto.split()
+contagem_palavras = {}
 
-# for palavra in palavras:
-#     if palavra in contagem_palavras:
-#         contagem_palavras[palavra] += 1
-#     else:
-#         contagem_palavras[palavra] = 1
+for palavra in palavras:
+    if palavra in contagem_palavras:
+        contagem_palavras[palavra] += 1
+    else:
+        contagem_palavras[palavra] = 1
 
-# print(contagem_palavras)
+print(contagem_palavras)
